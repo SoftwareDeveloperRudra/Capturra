@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturra - Where Creators Shine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f0f13;
+            color: #e2e0f0;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        }
+
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
+        }
+
+        .photo-card {
+            aspect-ratio: 4/3;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #2a2a3e;
+        }
+
+        .photo-card::before {
+            content: '📸';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            opacity: 0.2;
+        }
+
+        .creator-card {
+            background: #16161f;
+            border: 1px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-8px);
+            border-color: #7c3aed;
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+        }
+
+        .rank-badge {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: #fff;
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .like-btn {
+            transition: all 0.2s ease;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .like-btn.liked {
+            color: #ef4444;
+        }
+
+        .search-bar {
+            background: rgba(22, 22, 31, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #3a3a5c;
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .notification-dot {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            position: absolute;
+            top: -2px;
+            right: -2px;
+        }
+
+        /* Category icons dark bg */
+        .cat-purple { background: linear-gradient(135deg, #2e1a5e, #3b1f7a); }
+        .cat-green  { background: linear-gradient(135deg, #0f2a1a, #14352a); }
+        .cat-pink   { background: linear-gradient(135deg, #2e1028, #3a1535); }
+        .cat-yellow { background: linear-gradient(135deg, #2a2010, #352a10); }
+        .cat-blue   { background: linear-gradient(135deg, #0f1e35, #122540); }
+        .cat-red    { background: linear-gradient(135deg, #2a1010, #351515); }
+    </style>
+</head>
+<body>
+    <div id="home-page" class="page">
+
+        <!-- Navigation -->
+        <nav class="fixed w-full top-0 z-50" style="background:#0f0f13; border-bottom:1px solid #2a2a3e;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0 flex items-center">
+                            <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                                <button class="text-white font-bold text-lg"><a href="2.html"></a>C</button>
+                            </div>
+                            <div>
+                                <span class="text-2xl font-bold text-white">Capturra</span>
+                                <div class="text-xs -mt-1" style="color:#6b6b8a;">Where Creators Shine</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="#home"     class="font-medium transition-colors" style="color:#a0a0c0;" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#a0a0c0'">Home</a>
+                        <a href="#explore"  class="font-medium transition-colors" style="color:#a0a0c0;" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#a0a0c0'">Explore</a>
+                        <a href="#creators" class="font-medium transition-colors" style="color:#a0a0c0;" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#a0a0c0'">Creators</a>
+                        <a href="#trending" class="font-medium transition-colors" style="color:#a0a0c0;" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#a0a0c0'">Trending</a>
+                        <a href="#about"    class="font-medium transition-colors" style="color:#a0a0c0;" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#a0a0c0'">About</a>
+                    </div>
+
+                    <div class="hidden md:flex items-center space-x-4">
+                        <button><a href="login.html" class="px-4 py-2 font-medium transition-colors" style="color:#a0a0c0;">Login</a></button>
+                        <button><a href="signup.html" class="gradient-bg text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Sign Up</a></button>
+                    </div>
+
+                    <div class="md:hidden">
+                        <button style="color:#a0a0c0;">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="relative bg-cover bg-center pt-20 pb-16 lg:pt-24 lg:pb-20"
+            style="background-image: url('../assets/images/1-1-1.jpg');">
+            <div class="absolute inset-0" style="background:rgba(10,8,20,0.75);"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                    Where Creators
+                    <span style="color:#a855f7;">Shine</span>
+                </h1>
+                <p class="text-xl mb-8 max-w-3xl mx-auto leading-relaxed" style="color:rgba(200,190,230,0.9);">
+                    Discover amazing photographers, showcase your work, and connect with clients. Join the ultimate platform for creative professionals.
+                </p>
+
+                <div class="max-w-2xl mx-auto mb-8">
+                    <!-- Live Search Container -->
+                    <div class="relative">
+                        <div class="search-bar rounded-2xl p-2 flex items-center shadow-lg">
+                            <input type="text" id="searchInput" placeholder="Search photographers, locations, or styles..."
+                                class="flex-1 bg-transparent px-4 py-3 focus:outline-none"
+                                style="color:#e2e0f0;" placeholder-style="color:#6b6b8a;">
+                            <button class="gradient-bg text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
+                                Search
+                            </button>
+                        </div>
+                        <!-- Live Search Dropdown -->
+                        <div id="searchDropdown" class="absolute top-full left-0 right-0 mt-2 bg-gray-800 border border-gray-600 rounded-lg shadow-lg hidden z-50 max-h-64 overflow-y-auto">
+                            <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <a href="signup.html"
+                    class="inline-block px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
+                    style="border:2px solid #7c3aed; color:#e2e0f0;"
+                    onmouseover="this.style.background='#7c3aed'"
+                    onmouseout="this.style.background='transparent'">
+                    Join Now
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Photographers -->
+        <section id="creators" class="py-20" style="background:#0f0f13;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Featured Photographers</h2>
+                    <p class="text-xl" style="color:#6b6b8a;">Top creators making waves in the community</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <!-- Card 1 -->
+                    <div class="creator-card text-center">
+                        <div class="relative mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto flex items-center justify-center text-2xl">👨‍💼</div>
+                            <div class="rank-badge absolute -top-2 -right-2">#1</div>
+                        </div>
+                        <h3 class="font-semibold text-white mb-1">Alex Chen</h3>
+                        <p class="text-sm mb-2" style="color:#a0a0c0;">Portrait Specialist</p>
+                        <p class="text-xs mb-3" style="color:#6b6b8a;">📍 New York</p>
+                        <div class="flex justify-center items-center space-x-4 text-sm mb-4" style="color:#a0a0c0;">
+                            <span>❤️ 2.5K</span><span>👥 890</span>
+                        </div>
+                        <button class="w-full py-2 rounded-lg font-medium transition-colors" style="background:#1e1535; color:#a855f7;" onmouseover="this.style.background='#2d1f50'" onmouseout="this.style.background='#1e1535'">View Profile</button>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="creator-card text-center">
+                        <div class="relative mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full mx-auto flex items-center justify-center text-2xl">👩‍💼</div>
+                            <div class="rank-badge absolute -top-2 -right-2">#2</div>
+                        </div>
+                        <h3 class="font-semibold text-white mb-1">Sarah Johnson</h3>
+                        <p class="text-sm mb-2" style="color:#a0a0c0;">Wedding Photography</p>
+                        <p class="text-xs mb-3" style="color:#6b6b8a;">📍 Los Angeles</p>
+                        <div class="flex justify-center items-center space-x-4 text-sm mb-4" style="color:#a0a0c0;">
+                            <span>❤️ 2.1K</span><span>👥 756</span>
+                        </div>
+                        <button class="w-full py-2 rounded-lg font-medium transition-colors" style="background:#1e1535; color:#a855f7;" onmouseover="this.style.background='#2d1f50'" onmouseout="this.style.background='#1e1535'">View Profile</button>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="creator-card text-center">
+                        <div class="relative mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full mx-auto flex items-center justify-center text-2xl">👨‍🎨</div>
+                            <div class="rank-badge absolute -top-2 -right-2">#3</div>
+                        </div>
+                        <h3 class="font-semibold text-white mb-1">Mike Rodriguez</h3>
+                        <p class="text-sm mb-2" style="color:#a0a0c0;">Nature & Landscape</p>
+                        <p class="text-xs mb-3" style="color:#6b6b8a;">📍 Colorado</p>
+                        <div class="flex justify-center items-center space-x-4 text-sm mb-4" style="color:#a0a0c0;">
+                            <span>❤️ 1.8K</span><span>👥 623</span>
+                        </div>
+                        <button class="w-full py-2 rounded-lg font-medium transition-colors" style="background:#1e1535; color:#a855f7;" onmouseover="this.style.background='#2d1f50'" onmouseout="this.style.background='#1e1535'">View Profile</button>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="creator-card text-center">
+                        <div class="relative mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-full mx-auto flex items-center justify-center text-2xl">👩‍🎨</div>
+                            <div class="rank-badge absolute -top-2 -right-2">#4</div>
+                        </div>
+                        <h3 class="font-semibold text-white mb-1">Emma Wilson</h3>
+                        <p class="text-sm mb-2" style="color:#a0a0c0;">Fashion Photography</p>
+                        <p class="text-xs mb-3" style="color:#6b6b8a;">📍 Miami</p>
+                        <div class="flex justify-center items-center space-x-4 text-sm mb-4" style="color:#a0a0c0;">
+                            <span>❤️ 1.6K</span><span>👥 542</span>
+                        </div>
+                        <button class="w-full py-2 rounded-lg font-medium transition-colors" style="background:#1e1535; color:#a855f7;" onmouseover="this.style.background='#2d1f50'" onmouseout="this.style.background='#1e1535'">View Profile</button>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="creator-card text-center">
+                        <div class="relative mb-4">
+                            <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full mx-auto flex items-center justify-center text-2xl">👨‍💻</div>
+                            <div class="rank-badge absolute -top-2 -right-2">#5</div>
+                        </div>
+                        <h3 class="font-semibold text-white mb-1">David Kim</h3>
+                        <p class="text-sm mb-2" style="color:#a0a0c0;">Street Photography</p>
+                        <p class="text-xs mb-3" style="color:#6b6b8a;">📍 Chicago</p>
+                        <div class="flex justify-center items-center space-x-4 text-sm mb-4" style="color:#a0a0c0;">
+                            <span>❤️ 1.4K</span><span>👥 489</span>
+                        </div>
+                        <button class="w-full py-2 rounded-lg font-medium transition-colors" style="background:#1e1535; color:#a855f7;" onmouseover="this.style.background='#2d1f50'" onmouseout="this.style.background='#1e1535'">View Profile</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Photos -->
+        <section id="trending" class="py-20" style="background:#0c0c14;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-16">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white mb-4">Trending Photos</h2>
+                        <p class="text-xl" style="color:#6b6b8a;">Most liked and shared this week</p>
+                    </div>
+                    <button style="color:#a855f7;" onmouseover="this.style.color='#c084fc'" onmouseout="this.style.color='#a855f7'">View All →</button>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Photo cards — same structure, dark bg applied via .photo-card -->
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Golden Hour</p><p class="text-sm opacity-75">by Alex Chen</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">234</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">City Lights</p><p class="text-sm opacity-75">by Sarah Johnson</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">189</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Mountain Peak</p><p class="text-sm opacity-75">by Mike Rodriguez</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">156</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Fashion Week</p><p class="text-sm opacity-75">by Emma Wilson</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">298</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Street Art</p><p class="text-sm opacity-75">by David Kim</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">167</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Ocean Waves</p><p class="text-sm opacity-75">by Lisa Park</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">203</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Vintage Car</p><p class="text-sm opacity-75">by Tom Brown</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">145</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card card-hover group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="flex justify-between items-end">
+                                <div><p class="font-medium">Sunset Silhouette</p><p class="text-sm opacity-75">by Anna Lee</p></div>
+                                <div class="flex items-center space-x-2"><button class="like-btn text-white hover:text-red-400">❤️</button><span class="text-sm">278</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section id="explore" class="py-20" style="background:#0f0f13;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Explore by Category</h2>
+                    <p class="text-xl" style="color:#6b6b8a;">Find photographers specializing in your preferred style</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+
+    <a href="portrait.php" class="text-center group cursor-pointer block">
+        <div class="cat-purple w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">👤</span>
+        </div>
+        <h3 class="font-medium text-white">Portrait</h3>
+        <p class="text-sm" style="color:#6b6b8a;">1,234 creators</p>
+    </a>
+
+    <a href="nature.php" class="text-center group cursor-pointer block">
+        <div class="cat-green w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">🌿</span>
+        </div>
+        <h3 class="font-medium text-white">Nature</h3>
+        <p class="text-sm" style="color:#6b6b8a;">892 creators</p>
+    </a>
+
+    <a href="fashion.php" class="text-center group cursor-pointer block">
+        <div class="cat-pink w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">👗</span>
+        </div>
+        <h3 class="font-medium text-white">Fashion</h3>
+        <p class="text-sm" style="color:#6b6b8a;">567 creators</p>
+    </a>
+
+    <a href="wedding.php" class="text-center group cursor-pointer block">
+        <div class="cat-yellow w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">💒</span>
+        </div>
+        <h3 class="font-medium text-white">Wedding</h3>
+        <p class="text-sm" style="color:#6b6b8a;">743 creators</p>
+    </a>
+
+    <a href="street.php" class="text-center group cursor-pointer block">
+        <div class="cat-blue w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">🏙️</span>
+        </div>
+        <h3 class="font-medium text-white">Street</h3>
+        <p class="text-sm" style="color:#6b6b8a;">456 creators</p>
+    </a>
+
+    <a href="events.php" class="text-center group cursor-pointer block">
+        <div class="cat-red w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <span class="text-3xl">🎭</span>
+        </div>
+        <h3 class="font-medium text-white">Events</h3>
+        <p class="text-sm" style="color:#6b6b8a;">321 creators</p>
+    </a>
+
+</div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="gradient-bg py-20">
+            <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-white mb-6">Ready to Shine?</h2>
+                <p class="text-xl mb-8 leading-relaxed" style="color:rgba(220,210,255,0.9);">
+                    Join thousands of creators who are building their careers and connecting with clients on Capturra. Your next opportunity is just a click away.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-colors"
+                        style="background:#1a0a2e; color:#e2e0f0;"
+                        onmouseover="this.style.background='#2d1f50'"
+                        onmouseout="this.style.background='#1a0a2e'">
+                        <a href="signup.html">Join Now</a>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="about" class="py-16" style="background:#080810;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="md:col-span-2">
+                        <div class="flex items-center mb-6">
+                            <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center mr-3">
+                                <span class="text-white font-bold text-lg">C</span>
+                            </div>
+                            <div>
+                                <span class="text-2xl font-bold text-white">Capturra</span>
+                                <div class="text-sm" style="color:#6b6b8a;">Where Creators Shine</div>
+                            </div>
+                        </div>
+                        <p class="mb-6 max-w-md" style="color:#6b6b8a;">
+                            The ultimate platform for photographers to showcase their work, connect with clients, and build successful creative careers.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors" style="background:#16161f;" onmouseover="this.style.background='#2a2a3e'" onmouseout="this.style.background='#16161f'"><span class="text-lg">📘</span></a>
+                            <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors" style="background:#16161f;" onmouseover="this.style.background='#2a2a3e'" onmouseout="this.style.background='#16161f'"><span class="text-lg">📷</span></a>
+                            <a href="#" class="w-10 h-10 rounded-lg flex items-center justify-center transition-colors" style="background:#16161f;" onmouseover="this.style.background='#2a2a3e'" onmouseout="this.style.background='#16161f'"><span class="text-lg">🐦</span></a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Platform</h4>
+                        <ul class="space-y-2" style="color:#6b6b8a;">
+                            <li><a href="#explore"  class="hover:text-white transition-colors">Explore</a></li>
+                            <li><a href="#creators" class="hover:text-white transition-colors">Creators</a></li>
+                            <li><a href="#trending" class="hover:text-white transition-colors">Trending</a></li>
+                            <li><a href="#explore"  class="hover:text-white transition-colors">Categories</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+    <h4 class="font-semibold text-white mb-4">Support</h4>
+    <ul class="space-y-2" style="color:#6b6b8a;">
+        <li>
+            <a href="support.php" class="hover:text-white transition-colors">
+                Help Center
+            </a>
+        </li>
+        <li>
+            <a href="contact_us.php" class="hover:text-white transition-colors">
+                Contact Us
+            </a>
+        </li>
+        <li>
+            <a href="privacy_policy.php" class="hover:text-white transition-colors">
+                Privacy Policy
+            </a>
+        </li>
+        <li>
+            <a href="tos.php" class="hover:text-white transition-colors">
+                Terms of Service
+            </a>
+        </li>
+    </ul>
+</div>
+                </div>
+
+                <div class="mt-12 pt-8 text-center" style="border-top:1px solid #2a2a3e; color:#6b6b8a;">
+                    <p>&copy; 2024 Capturra. All rights reserved. Where Creators Shine.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Live Search JavaScript -->
+    <script>
+        // Get DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        let debounceTimer;
+
+        // Build correct endpoint path: same folder as 2.html
+        const searchEndpoint = 'search.php';
+
+        // Listen for input events on search bar with debounce
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            const query = this.value.trim();
+
+            if (query === '') {
+                searchDropdown.classList.add('hidden');
+                return;
+            }
+
+            debounceTimer = setTimeout(() => {
+                performSearch(query);
+            }, 300);
+        });
+
+        // Perform search request to backend
+        async function performSearch(query) {
+            try {
+                const url = `search.php?q=${encodeURIComponent(query)}`;
+                console.log('Fetching search from:', url);
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("FINAL DATA:", data);
+                renderResults(data);
+            } catch (error) {
+                console.error('Search error:', error);
+                searchDropdown.innerHTML = `<div class="px-4 py-3 text-gray-400 text-sm">Error: ${error.message}</div>`;
+                searchDropdown.classList.remove('hidden');
+            }
+        }
+
+        // Render search dropdown results
+        function renderResults(data) {
+            let html = '';
+
+            if (data.users && data.users.length > 0) {
+                html += '<div class="px-4 py-2 text-gray-300 text-sm font-semibold border-b border-gray-600">Users</div>';
+                data.users.forEach(user => {
+                    html += `
+                        <div class="px-4 py-3 hover:bg-gray-700 cursor-pointer transition-colors" onclick="window.location.href='/Capturra/public/profile.php?username=${user.username}'">
+                            <div class="font-semibold text-white">${user.name}</div>
+                            <div class="text-sm text-gray-400">@${user.username}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (data.photos && data.photos.length > 0) {
+                if (html !== '') html += '<div class="border-t border-gray-600"></div>';
+                html += '<div class="px-4 py-2 text-gray-300 text-sm font-semibold border-b border-gray-600">Photos</div>';
+                data.photos.forEach(photo => {
+                    html += `
+                        <div class="px-4 py-3 hover:bg-gray-700 cursor-pointer transition-colors flex items-center space-x-3" onclick="window.location.href='/Capturra/public/photo.php?id=${photo.id}'">
+                            <img src="${photo.image}" alt="Photo" class="w-12 h-12 object-cover rounded">
+                            <div class="flex-1">
+                                <div class="text-sm text-gray-400">@${photo.username}</div>
+                                <div class="text-white text-sm">${photo.caption || 'Photo'}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (html === '') {
+                html = '<div class="px-4 py-3 text-gray-400">No results found</div>';
+            }
+
+            searchDropdown.innerHTML = html;
+            searchDropdown.classList.remove('hidden');
+        }
+
+        // Hide dropdown when clicking outside the search container
+        document.addEventListener('click', function(e) {
+            if (!searchInput.closest('.relative').contains(e.target)) {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+
+    <script>
+        // (Tumhara original JavaScript bilkul same rahega — koi change nahi)
+        let currentPage = 'home';
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => { page.style.display = 'none'; });
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) { targetPage.style.display = 'block'; currentPage = pageId; window.scrollTo(0, 0); }
+        }
+        function showHome()   { showPage('home-page'); }
+        function showLogin()  { showPage('login-page'); }
+        function showSignUp() { showPage('signup-page'); }
+
+        document.addEventListener('click', function(e) {
+            const buttonText = e.target.textContent.trim();
+            if (buttonText.includes('Login') || buttonText.includes('Sign In')) showLogin();
+            else if (buttonText.includes('Sign Up') || buttonText.includes('Join Now')) showSignUp();
+            else if (buttonText.includes('Back to Home')) showHome();
+            else if (buttonText.includes('Create Account')) { alert('Welcome to Capturra!'); showHome(); }
+            else if (buttonText.includes('View Profile')) alert('Creator profile would open here.');
+            else if (buttonText.includes('View All')) alert('Full trending photos gallery would open here.');
+            else if (buttonText.includes('Search')) {
+                const searchInput = document.querySelector('input[placeholder*="Search"]');
+                if (searchInput && searchInput.value) alert(`Searching for: "${searchInput.value}"`);
+                else alert('Please enter a search term.');
+            }
+        });
+
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('liked');
+                const countSpan = this.nextElementSibling;
+                if (countSpan) {
+                    let count = parseInt(countSpan.textContent);
+                    countSpan.textContent = this.classList.contains('liked') ? count + 1 : count - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll('.group.cursor-pointer').forEach(category => {
+    category.addEventListener('click', function() {
+        this.style.transform = "scale(0.95)";
+        setTimeout(() => {
+            this.style.transform = "scale(1)";
+        }, 150);
+    });
+});
+    </script>
+</body>
+</html>

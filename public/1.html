@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capturra – Where Creators Shine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+  scroll-behavior: smooth;
+}
+
+/* Glass effect cards */
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Hover zoom effect */
+.post-img {
+  transition: transform 0.4s ease;
+}
+.post-card:hover .post-img {
+  transform: scale(1.05);
+}
+
+/* Smooth card hover */
+.post-card {
+  transition: all 0.3s ease;
+}
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Gradient background */
+body {
+  background: linear-gradient(135deg, #f3f4f6, #e0e7ff);
+}
+
+/* Modal animation */
+#imageModal img {
+  animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+        :root {
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #050505;
+            --color-pink: #ff00ff;
+            --color-purple: #7000ff;
+            --color-blue: #00d4ff;
+        }
+
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%;
+            background: var(--bg-dark);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; 
+        }
+
+        /* BACKGROUND SLIDESHOW */
+        .background-slideshow {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .background-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        .background-slide.active { opacity: 0.3; }
+
+        .background-slide:nth-child(1) { background-image: url('../assets/images/s1.jpeg'); }
+        .background-slide:nth-child(2) { background-image: url('../assets/images/s2.jpeg'); }
+        .background-slide:nth-child(3) { background-image: url('../assets/images/s3.jpeg'); }
+
+        /* STICKY HEADER WITH TAGLINE */
+        .sticky-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            margin: 0;
+        }
+
+        .hero-tagline {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-top: 10px;
+        }
+
+        .hero-trigger { height: 85vh; position: relative; z-index: 2; }
+
+        section { 
+            padding: 50px 20px; 
+            position: relative; 
+            z-index: 500; 
+            background: var(--bg-dark); 
+        }
+
+        .container { max-width: 850px; margin: auto; }
+
+        /* REFINED SMALL BENTO BOXES */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .feature-card {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 22px 18px;
+            text-align: center;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
+            overflow: hidden;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 { font-size: 1rem; margin: 10px 0 5px 0; font-family: 'Syne'; }
+        .feature-card p { font-size: 0.75rem; opacity: 0.6; margin: 0; line-height: 1.4; }
+
+        /* COMPACT FEEDBACK */
+        .comment-stack { max-width: 580px; margin: auto; }
+        .comment {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 12px 18px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            transition: 0.4s;
+            overflow: hidden;
+        }
+
+        .initial-avatar {
+            width: 36px; height: 36px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
+        }
+
+        /* DYNAMIC LIGHTING */
+        .feature-card::after, .comment::after {
+            content: '';
+            position: absolute;
+            bottom: -20px; left: 10%;
+            width: 80%; height: 40px;
+            filter: blur(25px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        .feature-card:hover, .comment:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.25); }
+        .feature-card:hover::after, .comment:hover::after { opacity: 1; }
+
+        .h-pink::after { background: radial-gradient(circle, var(--color-pink), transparent 70%); }
+        .h-purple::after { background: radial-gradient(circle, var(--color-purple), transparent 70%); }
+        .h-blue::after { background: radial-gradient(circle, var(--color-blue), transparent 70%); }
+
+        /* GOOGLE AI ROTATING BUTTON */
+        .explore-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-top: 40px;
+            perspective: 1000px;
+        }
+        .explore-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.2) 0%, rgba(112, 0, 255, 0.1) 40%, transparent 70%);
+            filter: blur(30px);
+            z-index: -1;
+            animation: aurora-pulse 4s infinite alternate ease-in-out;
+        }
+        .btn-ai {
+            position: relative;
+            display: inline-block;
+            padding: 16px 45px;
+            background: #000;
+            color: #fff;
+            border-radius: 100px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            overflow: hidden;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+        .btn-ai::after {
+            content: '';
+            position: absolute;
+            inset: -200%;
+            background: conic-gradient(from 0deg, transparent, var(--color-pink), var(--color-purple), var(--color-blue), transparent);
+            animation: rotate-ai 4s linear infinite;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .btn-ai span { position: relative; z-index: 2; }
+        .explore-wrapper:hover .btn-ai { transform: rotateX(12deg) rotateY(12deg) scale(1.06); border-color: transparent; }
+        .explore-wrapper:hover .btn-ai::after { opacity: 1; }
+
+        @keyframes rotate-ai { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes aurora-pulse { 0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.9); } 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); } }
+
+        @media (max-width: 650px) { .features-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="background-slideshow">
+        <div class="background-slide active"></div>
+        <div class="background-slide"></div>
+        <div class="background-slide"></div>
+    </div>
+
+    <div class="sticky-container" id="sticky-hero">
+        <h1 class="hero-title">Capturra</h1>
+        <h2 class="hero-tagline" id="tagline">Where Creators Shine</h2>
+    </div>
+
+    <div class="hero-trigger"></div>
+
+    <section>
+        <div class="container">
+            <h2 style="text-align:center; margin-bottom:35px; font-family:'Syne'; font-size: 1.6rem;">Features</h2>
+            <div class="features-grid">
+                <div class="feature-card h-pink"><span>📸</span><h3>Portfolio</h3><p>Show work beautifully.</p></div>
+                <div class="feature-card h-purple"><h3>🌍 Reach</h3><p>Connect globally.</p></div>
+                <div class="feature-card h-blue"><h3>💬 Chat</h3><p>Instant comms.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 style="text-align:center; margin-bottom:35px; font-family:'Syne'; font-size: 1.6rem;">Feedback</h2>
+            <div class="comment-stack">
+                <div class="comment h-blue">
+                    <div class="initial-avatar" style="background: linear-gradient(135deg, #6366f1, #a855f7);">P</div>
+                    <div><strong>@PhotoMaster</strong><p style="font-size: 0.85rem; opacity:0.7">Grew 300% on Capturra! 📈</p></div>
+                </div>
+                <div class="comment h-pink">
+                    <div class="initial-avatar" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">C</div>
+                    <div><strong>@CreativePixel</strong><p style="font-size: 0.85rem; opacity:0.7">Best platform for creators 🔥</p></div>
+                </div>
+            </div>
+            
+        </div>
+
+    </section>
+
+    <section style="text-align:center; padding-bottom: 120px;">
+        <div class="explore-wrapper">
+            <a href="2.html" class="btn-ai"><span>Explore Platform</span></a>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".hero-trigger",
+                start: "top top",
+                end: "bottom center",
+                scrub: 1
+            }
+        });
+
+        tl.to("#sticky-hero", {
+            height: "70px",
+            background: "rgba(5, 5, 5, 0.95)",
+            backdropFilter: "blur(15px)"
+        }, 0);
+
+        tl.to(".hero-title", { scale: 0.28 }, 0);
+
+        tl.to("#tagline", { 
+            opacity: 0, 
+            y: -15, 
+            display: "none",
+            duration: 0.4 
+        }, 0);
+
+        let slides = document.querySelectorAll('.background-slide');
+        let index = 0;
+        setInterval(() => {
+            slides[index].classList.remove('active');
+            index = (index + 1) % slides.length;
+            slides[index].classList.add('active');
+        }, 5000);
+    </script>
+</body>
+</html>
