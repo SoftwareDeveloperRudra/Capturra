@@ -1,0 +1,122 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:10;
+}
+.navbar a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#fff;
+  opacity:.8;
+}
+.login{color:#f6c300}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:120px 80px;
+  perspective:1200px;
+}
+
+/* TEXT */
+.hero-text{
+  max-width:520px;
+}
+.tag{
+  color:#f6c300;
+  letter-spacing:3px;
+  font-size:12px;
+}
+.hero-text h1{
+  font-size:54px;
+  margin:20px 0;
+}
+.hero-text span{color:#f6c300}
+
+.hero-text ul{
+  list-style:none;
+  margin:20px 0;
+}
+.hero-text li{
+  margin:10px 0;
+  position:relative;
+  padding-left:25px;
+}
+.hero-text li::before{
+  content:"✔";
+  color:#f6c300;
+  position:absolute;
+  left:0;
+}
+
+button{
+  margin-top:25px;
+  padding:14px 36px;
+  border:none;
+  background:#f6c300;
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+  border-radius:30px;
+}
+
+/* VISUAL */
+.hero-visual{
+  position:relative;
+  width:420px;
+  height:420px;
+  transform-style:preserve-3d;
+}
+
+.camera{
+  width:100%;
+  position:relative;
+  z-index:2;
+}
+
+/* Rings */
+.ring{
+  position:absolute;
+  inset:-40px;
+  border:2px solid rgba(246,195,0,.5);
+  border-radius:50%;
+  animation:spin 20s linear infinite;
+}
+.ring2{
+  inset:-70px;
+  border:2px dashed rgba(246,195,0,.3);
+  animation-direction:reverse;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* SCROLL SECTIONS */
+.spacer{
+  height:100vh;
+}
+
+.gallery{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}

@@ -1,0 +1,24 @@
+/* Gradient Background for Buttons and Logo */
+body {
+            font-family: 'Inter', sans-serif;
+        }
+.gradient-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Smooth hover effect for links */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* Custom input focus styling */
+input:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(128, 0, 255, 0.3);
+  outline: none;
+}
+
+/* Responsive container */
+.container-center {
+  max-width: 420px;
+  margin: 0 auto;
+}

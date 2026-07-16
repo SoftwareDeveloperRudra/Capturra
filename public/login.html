@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Capturra</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    overflow: hidden;
+}
+
+/* LAYOUT */
+.auth-container{
+    display:flex;
+    height:100vh;
+    width:100vw;
+}
+
+/* LEFT VISUAL */
+.side-visual{
+    width:50%;
+    height:100%;
+    background:linear-gradient(135deg,#8b5cf6 0%,#1e1b4b 100%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* RIGHT FORM (FIXED LEFT ALIGN) */
+.side-form{
+    width:50%;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start; /* ✅ LEFT ALIGN */
+    padding-left:100px;
+    background:linear-gradient(180deg,#ffffff,#f8f5ff);
+}
+
+/* GLASS CARD */
+.glass-card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:24px;
+    padding:40px;
+    text-align:center;
+    color:white;
+    width:80%;
+}
+
+/* INPUT */
+.input-field{
+    background:#f1f5f9;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:12px 14px;
+    width:100%;
+    outline:none;
+    transition:0.2s;
+}
+
+.input-field:focus{
+    border-color:#8b5cf6;
+    background:white;
+    box-shadow:0 0 0 2px rgba(139,92,246,0.2);
+}
+
+/* BUTTON */
+.btn-gradient{
+    background:linear-gradient(90deg,#7c3aed,#a855f7);
+    color:white;
+    font-weight:bold;
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.btn-gradient:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(124,58,237,0.3);
+}
+
+/* PAGE ANIMATION */
+body{
+    opacity:0;
+    transform:translateX(40px);
+    animation:pageEnter 0.6s ease forwards;
+}
+
+@keyframes pageEnter{
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+.page-exit{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:all 0.4s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<!-- LEFT VISUAL -->
+<div class="side-visual">
+
+<div class="glass-card">
+
+<h2 class="text-3xl font-black mb-4">
+New here?
+</h2>
+
+<p class="text-white/70 mb-8">
+Create your Capturra account and start showcasing your photography.
+</p>
+
+<a href="signup.html"
+class="border-2 border-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-white hover:text-purple-600 transition-all inline-block">
+
+Sign Up
+
+</a>
+
+</div>
+
+</div>
+
+<!-- RIGHT LOGIN FORM -->
+<div class="side-form">
+
+<div class="w-full max-w-md py-10">
+
+<div class="mb-8">
+
+ <h1 class="text-3xl font-black text-slate-900">Welcome Back
+</h1>
+
+
+   <p class="text-slate-500 text-sm mt-1">Login to continue to Capturra
+</p>
+
+</div>
+
+<form action="login.php" method="POST" class="space-y-4">
+
+<!-- EMAIL -->
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">
+Email
+</label>
+
+<input
+type="email"
+name="email"
+class="input-field"
+placeholder="Enter your email"
+required>
+</div>
+
+<!-- PASSWORD -->
+<div>
+<label class="block text-xs font-bold text-slate-700 mb-1">
+Password
+</label>
+
+<input
+type="password"
+name="password"
+class="input-field"
+placeholder="Enter your password"
+required>
+
+<div class="text-right mt-1">
+<a href="forgot_password.html" class="text-xs text-purple-600 hover:underline">
+Forgot Password?
+</a>
+</div>
+</div>
+
+<!-- BUTTON -->
+<button
+type="submit"
+class="btn-gradient mt-4">
+
+Login
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.querySelectorAll("a").forEach(link => {
+
+link.addEventListener("click", function(e){
+
+const url = this.href;
+
+if(url){
+
+e.preventDefault();
+
+document.body.classList.add("page-exit");
+
+setTimeout(()=>{
+window.location.href = url;
+},400);
+
+}
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
