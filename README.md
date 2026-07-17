@@ -166,7 +166,7 @@ Steps:
 Web Developer | Problem Solver | Tech Enthusiast
 
 GitHub:
-https://github.com/WebByRudra
+https://github.com/SoftwareDeveloperRudra
 
 ---
 
