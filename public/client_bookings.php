@@ -90,7 +90,7 @@ body{
 .tab{
     padding:8px 18px;
     border-radius:30px;
-    border:1px solid #2a2a3e;
+     color: #8e5050 !important;
     cursor:pointer;
 }
 .tab.active{

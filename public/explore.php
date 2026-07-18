@@ -259,7 +259,7 @@ function followPhotographer(btn, id) {
 }
 
 function likePost(photoId, btn) {
-    fetch("like.php", {
+    fetch("../actions/like.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: "photo_id=" + photoId
@@ -282,7 +282,7 @@ function logout() {
 function handleDoubleClick(e, imgEl, photoId) {
     e.preventDefault();
 
-    fetch("like.php", {
+    fetch("../actions/like.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: "photo_id=" + photoId
