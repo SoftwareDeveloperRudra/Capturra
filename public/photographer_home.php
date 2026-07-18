@@ -136,6 +136,53 @@ if (!$result) {
 .dark .text-gray-700, .dark .text-gray-500 { color: #bbbbbb !important; }
 .dark .border-gray-200 { border-color: #2a2a2a !important; }
 .dark .upload-zone { border-color: #444444 !important; background-color: rgba(255,255,255,0.03) !important; }
+
+
+    .watermark-overlay{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.watermark{
+    position:absolute;
+    font-size:22px;
+    font-weight:bold;
+    color:rgba(255,255,255,0.22);
+    transform:rotate(-25deg);
+    font-family:Arial, sans-serif;
+    text-shadow:1px 1px 4px rgba(0,0,0,0.35);
+    white-space:nowrap;
+}
+
+/* Positions */
+.top-left{
+    top:12%;
+    left:6%;
+}
+
+.top-right{
+    top:12%;
+    right:6%;
+}
+
+.center{
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(-25deg);
+}
+
+.bottom-left{
+    bottom:12%;
+    left:6%;
+}
+
+.bottom-right{
+    bottom:12%;
+    right:6%;
+}
+
+
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -511,6 +558,15 @@ document.addEventListener('click', function(event) {
      class="w-full rounded-t-xl cursor-pointer"
      style="max-height:300px; object-fit:contain;"
      onclick="openModal(this.src)">
+       <div class="watermark-overlay">
+
+    <span class="watermark top-left">CAPTURRA</span>
+
+    <span class="watermark center">CAPTURRA</span>
+
+    <span class="watermark bottom-right">CAPTURRA</span>
+
+</div>
     <!-- Like Button -->
     <div class="absolute left-3 top-1/2 transform -translate-y-1/2 z-20">
         <button onclick="likePost(<?php echo $row['id']; ?>, this)" class="bg-white px-3 py-2 rounded-full shadow flex items-center space-x-2 text-gray-500">
