@@ -513,12 +513,9 @@ document.addEventListener('click', function(event) {
      onclick="openModal(this.src)">
     <!-- Like Button -->
     <div class="absolute left-3 top-1/2 transform -translate-y-1/2 z-20">
-        <form action="../actions/like.php" method="POST">
-            <input type="hidden" name="photo_id" value="<?php echo $row['id']; ?>">
-            <button type="submit" class="bg-white px-3 py-2 rounded-full shadow flex items-center space-x-2">
-                ❤️ <span class="text-sm"><?php echo $row['total_likes']; ?></span>
-            </button>
-        </form>
+        <button onclick="likePost(<?php echo $row['id']; ?>, this)" class="bg-white px-3 py-2 rounded-full shadow flex items-center space-x-2 text-gray-500">
+            ❤️ <span class="text-sm"><?php echo $row['total_likes']; ?></span>
+        </button>
     </div>
 
     <!-- Comment Button -->
@@ -596,7 +593,7 @@ document.addEventListener('click', function(event) {
                                 </div>
                                 <p class="text-gray-700 mb-3">Urban life captured perfectly</p>
                                 <div class="flex items-center space-x-4">
-                                    <button onclick="likePost(this)" class="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors">
+                                    <button onclick="mockLikePost(this)" class="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors">
                                         <span>❤️</span>
                                         <span class="text-sm">892</span>
                                     </button>
@@ -819,7 +816,29 @@ document.addEventListener('click', function(event) {
         }
 
         // Post interaction functions
-        function likePost(button) {
+        function likePost(photoId, btn) {
+            fetch("../actions/like.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "photo_id=" + photoId
+            })
+            .then(res => res.json())
+            .then(data => {
+                let countSpan = btn.querySelector("span:last-child");
+                let count = parseInt(countSpan.textContent);
+                if (data.status === "liked") {
+                    countSpan.textContent = count + 1;
+                    btn.classList.add("text-red-500");
+                    btn.classList.remove("text-gray-500");
+                } else {
+                    countSpan.textContent = count - 1;
+                    btn.classList.remove("text-red-500");
+                    btn.classList.add("text-gray-500");
+                }
+            });
+        }
+
+        function mockLikePost(button) {
             const likeCount = button.querySelector('span:last-child');
             const currentCount = parseInt(likeCount.textContent);
             likeCount.textContent = currentCount + 1;

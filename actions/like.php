@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Check photo_id
+// Check image
 if (!isset($_POST['photo_id'])) {
     echo json_encode(["status" => "error", "message" => "no_photo_id"]);
     exit();
@@ -32,6 +32,9 @@ if ($result->num_rows > 0) {
     $stmt->bind_param("ii", $user_id, $photo_id);
     $stmt->execute();
 
+    // Decrease likes count in photos table
+    $conn->query("UPDATE photos SET likes = GREATEST(likes - 1, 0) WHERE id = $photo_id");
+
     echo json_encode(["status" => "unliked"]);
 
 } else {
@@ -40,6 +43,9 @@ if ($result->num_rows > 0) {
     $stmt = $conn->prepare("INSERT INTO likes (user_id, photo_id) VALUES (?, ?)");
     $stmt->bind_param("ii", $user_id, $photo_id);
     $stmt->execute();
+
+    // Increase likes count in photos table
+    $conn->query("UPDATE photos SET likes = likes + 1 WHERE id = $photo_id");
 
     echo json_encode(["status" => "liked"]);
 }
