@@ -94,6 +94,66 @@ $result = mysqli_query($conn, $sql);
         .dark .upload-zone { border-color: #444444 !important; background-color: rgba(255,255,255,0.03) !important; }
         #darkToggle { background: transparent; border: 1px solid transparent; padding: 6px 8px; border-radius: 8px; color: inherit; }
         #darkToggle.active { background: rgba(255,255,255,0.04); }
+<<<<<<< HEAD
+
+        .photo-container{
+            position:relative;
+            overflow:hidden;
+            border-radius:12px;
+        }
+
+        .photo-img{
+            width:100%;
+            display:block;
+            max-height:300px;
+            object-fit:cover;
+        }
+
+        .watermark-overlay{
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+        }
+
+        .watermark{
+            position:absolute;
+            font-size:22px;
+            font-weight:bold;
+            color:rgba(255,255,255,0.22);
+            transform:rotate(-25deg);
+            font-family:Arial, sans-serif;
+            text-shadow:1px 1px 4px rgba(0,0,0,0.35);
+            white-space:nowrap;
+        }
+
+        /* Positions */
+        .top-left{
+            top:12%;
+            left:6%;
+        }
+
+        .top-right{
+            top:12%;
+            right:6%;
+        }
+
+        .center{
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%) rotate(-25deg);
+        }
+
+        .bottom-left{
+            bottom:12%;
+            left:6%;
+        }
+
+        .bottom-right{
+            bottom:12%;
+            right:6%;
+        }
+    </style>
+=======
    
         .photo-container{
     position:relative;
@@ -153,6 +213,7 @@ $result = mysqli_query($conn, $sql);
 }
 
    </style>
+>>>>>>> 2aff14cb16b2f2a46075e69a3d205302ca4be81d
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Top Navigation Bar -->
@@ -372,6 +433,21 @@ $result = mysqli_query($conn, $sql);
 <?php while($row = mysqli_fetch_assoc($result)) { ?>
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden card-hover">
         <a href="photo.php?id=<?php echo $row['id']; ?>">
+<<<<<<< HEAD
+            <div class="photo-container">
+                <img src="/Capturra/uploads/<?php echo htmlspecialchars($row['photo_path'] ?? $row['image']); ?>"
+                     class="photo-img"
+                     draggable="false"
+                     oncontextmenu="return false;">
+
+                <div class="watermark-overlay">
+                    <span class="watermark top-left">CAPTURRA</span>
+                    <span class="watermark center">CAPTURRA</span>
+                    <span class="watermark bottom-right">CAPTURRA</span>
+                </div>
+            </div>
+        </a>
+=======
 
 <div class="photo-container">
 
@@ -393,6 +469,7 @@ $result = mysqli_query($conn, $sql);
 </div>
 
 </a>
+>>>>>>> 2aff14cb16b2f2a46075e69a3d205302ca4be81d
         <div class="p-4">
             <div class="flex items-center space-x-3 mb-3">
                 <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">👤</div>
