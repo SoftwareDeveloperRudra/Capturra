@@ -1,5 +1,6 @@
 2026-05-01 19:22:57 - Request: POST
 Login success for: photo@gmail.com, role: photographer
+<<<<<<< HEAD
 2026-06-27 16:30:19 - Request: POST
 2026-06-27 16:31:45 - Request: POST
 2026-06-27 16:33:10 - Request: POST
@@ -17,3 +18,9 @@ Login success for: xyz@gmail.com, role: client
 Login success for: xyz@gmail.com, role: client
 2026-07-16 13:45:40 - Request: POST
 Login success for: abc@gmail.com, role: photographer
+=======
+>>>>>>> cfb0eccff3be1bde7df82182b0993aedbe3c77ba
+2026-07-18 18:29:04 - Request: POST
+Login success for: abc@gmail.com, role: photographer
+2026-07-18 18:29:27 - Request: POST
+Login success for: xyz@gmail.com, role: client
